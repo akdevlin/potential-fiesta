@@ -269,3 +269,22 @@ function adFilter() {
     });//End the jquery noconflict wrapper for wordpress
 
 }//end the case study filter function
+
+
+function adShowSearch(buttonId, searchID) {
+    var theButton = buttonId;
+    var theSearchBox = searchID;
+    jQuery(document).ready(function ($) { //
+        $(theSearchBox).hide();
+        $(theButton).click(function () {
+            if($(theSearchBox).hasClass('searching')){
+                $(theSearchBox).removeClass('searching');
+                $(theSearchBox).slideUp();
+            }
+            else{
+                $(theSearchBox).slideDown();
+                $(theSearchBox).addClass('searching');
+            }
+        });
+    });//End the jquery noconflict wrapper for wordpress
+}

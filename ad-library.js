@@ -20,6 +20,42 @@ function vanillaQuerySelection(selector) {
     return document[selectorType](selector);
 }
 
+//function that creates html elements as strings. does not allow for self closing elements or empty elements
+    //uses this object syntax to add html attributes 
+//     var SampleAttributeAy = [
+//         {attr : 'href',    attrVal : 'https://www.google.com'},
+//         {attr : 'title',   attrVal : 'Google Search Engine'}
+//     ];
+    
+    function adFillElement(elem, filler, optionalClass, optionalAttributeArray) {
+        if ((Number.isInteger(filler)) || (filler == (undefined || null))) {
+            //eventually do some checks that will allow for <br>, <img>, <hr>, etc
+            return '';
+        }
+        var optAttributes = optionalAttributeArray;
+        var elementAttributes = ' ';
+        //Checking for valid input
+        if ( (!Array.isArray(optAttributes)) || (optAttributes == (null || undefined)) )  {
+            optAttributes =  '';
+            elementAttributes = '';
+        }
+        else {
+            optAttributes.map(function(x){
+                var fullElement = x.attr + '="' + x.attrVal + '" ';
+                elementAttributes += fullElement;
+            });
+        }
+        var optClass = optionalClass;
+        if ((optClass == ((null || undefined || ''))) || ((Number.isInteger(optClass)))) {
+            optClass = '';
+        }
+        else {
+            optClass = ' class=" ' + optionalClass + ' "';
+        }
+        return '<' + elem + optClass + elementAttributes +  '>' + filler + '</' + elem + '>';
+    }
+
+
 //Add or remove spellcheking to/from a DOM element
 //Given a query selector string or array of them, this function will add or remove the spellcheck attribute to/from that element
 //ex. 1 spelChek('.firstName', true);
